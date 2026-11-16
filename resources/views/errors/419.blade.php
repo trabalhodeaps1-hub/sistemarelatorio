@@ -1,0 +1,5 @@
+@extends('errors.layout')
+@section('code', '419')
+@section('icon', 'hourglass-split')
+@section('title', 'Sessão expirada')
+@section('message', 'Sua sessão expirou por inatividade. Volte e tente novamente.')

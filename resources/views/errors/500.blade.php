@@ -1,0 +1,5 @@
+@extends('errors.layout')
+@section('code', '500')
+@section('icon', 'bug')
+@section('title', 'Erro interno')
+@section('message', 'Algo deu errado do nosso lado. A equipe de TI foi avisada pelos logs.')

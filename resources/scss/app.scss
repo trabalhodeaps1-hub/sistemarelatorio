@@ -1,0 +1,313 @@
+// Paleta AutoRelatório Industrial
+$primary: #0078DC;
+$info: #0086C8;
+$success: #00986D;
+$warning: #FFC24E;
+$body-bg: #F3F4F7;
+$sidebar-bg: #07132B;
+$card-bg: #fff;
+$modal-content-bg: #fff;
+$dropdown-bg: #fff;
+$list-group-bg: #fff;
+$input-bg: #fff;
+
+$font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$border-radius: .5rem;
+$enable-shadows: false;
+
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+// ---------- Layout ----------
+.app-wrapper { min-height: 100vh; }
+
+.sidebar {
+    background: $sidebar-bg;
+    color: rgba(#fff, .8);
+    width: 260px;
+
+    @include media-breakpoint-up(lg) {
+        position: fixed;
+        top: 0; bottom: 0; left: 0;
+        overflow-y: auto;
+        // o Bootstrap força "transparent !important" no .offcanvas-lg em telas grandes
+        background-color: $sidebar-bg !important;
+    }
+
+    &.offcanvas-lg { --bs-offcanvas-bg: #{$sidebar-bg}; --bs-offcanvas-color: #{rgba(#fff, .8)}; --bs-offcanvas-width: 260px; }
+
+    .brand {
+        color: #fff;
+        font-weight: 700;
+        letter-spacing: .02em;
+        text-decoration: none;
+        i { color: $warning; }
+    }
+
+    .nav-section {
+        font-size: .7rem;
+        text-transform: uppercase;
+        letter-spacing: .08em;
+        color: rgba(#fff, .4);
+        padding: 1rem 1rem .25rem;
+    }
+
+    .nav-link {
+        color: rgba(#fff, .75);
+        border-radius: $border-radius;
+        padding: .6rem 1rem;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        gap: .65rem;
+
+        &:hover { color: #fff; background: rgba(#fff, .06); }
+        &.active { color: #fff; background: $primary; }
+        i { font-size: 1.1rem; }
+    }
+}
+
+.main-content {
+    @include media-breakpoint-up(lg) { margin-left: 260px; }
+}
+
+.topbar {
+    background: #fff;
+    border-bottom: 1px solid $gray-200;
+    min-height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+
+.avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: $primary;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: .85rem;
+}
+
+.notif-badge {
+    position: absolute;
+    top: 2px; right: 0;
+    font-size: .65rem;
+}
+
+.notif-dropdown { width: 340px; max-width: 92vw; }
+
+// ---------- Componentes ----------
+.card { border: 0; box-shadow: 0 1px 3px rgba(0, 0, 0, .06); }
+
+.stat-card {
+    .stat-icon {
+        width: 48px; height: 48px;
+        border-radius: .75rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+    }
+    .stat-value { font-size: 1.75rem; font-weight: 700; line-height: 1; }
+}
+
+.page-header h1 { font-size: 1.5rem; font-weight: 700; margin: 0; }
+
+.btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: .35rem; }
+.btn-sm { min-height: 34px; }
+
+.foto-thumb {
+    width: 96px; height: 96px;
+    object-fit: cover;
+    border-radius: $border-radius;
+    cursor: pointer;
+}
+
+.foto-preview {
+    position: relative;
+    img { width: 96px; height: 96px; object-fit: cover; border-radius: $border-radius; }
+    .btn-remover {
+        position: absolute; top: -8px; right: -8px;
+        min-height: 0; width: 26px; height: 26px; padding: 0;
+        border-radius: 50%;
+    }
+}
+
+.timeline {
+    list-style: none;
+    padding-left: 1.25rem;
+    border-left: 2px solid $gray-300;
+    li { position: relative; padding-bottom: 1rem; }
+    li::before {
+        content: "";
+        position: absolute;
+        left: calc(-1.25rem - 6px);
+        top: .35rem;
+        width: 10px; height: 10px;
+        border-radius: 50%;
+        background: $primary;
+    }
+}
+
+.row-critica { border-left: 4px solid $danger; }
+
+.auth-bg {
+    min-height: 100vh;
+    background: linear-gradient(135deg, $sidebar-bg 0%, darken($primary, 15%) 100%);
+}
+
+// Tabelas viram cards no mobile
+@include media-breakpoint-down(md) {
+    .table-cards {
+        thead { display: none; }
+        tr { display: block; background: #fff; border-radius: $border-radius; margin-bottom: .75rem; padding: .5rem; box-shadow: 0 1px 3px rgba(0, 0, 0, .06); }
+        td { display: flex; justify-content: space-between; gap: 1rem; border: 0; padding: .35rem .5rem; text-align: right; }
+        td::before { content: attr(data-label); font-weight: 600; color: $gray-600; text-align: left; }
+    }
+}
+
+// ---------- Tela de login ----------
+.login-page { background: #fff; }
+
+.login-wrapper {
+    min-height: 100vh;
+    display: flex;
+}
+
+.login-hero {
+    flex: 1 1 65%;
+    display: none;
+    flex-direction: column;
+    padding: 2.25rem 2.25rem 1.5rem;
+    color: #fff;
+    background:
+        radial-gradient(ellipse at 85% 15%, rgba($primary, .22), transparent 55%),
+        linear-gradient(160deg, #0b2547 0%, $sidebar-bg 55%, #061026 100%);
+
+    @include media-breakpoint-up(lg) { display: flex; }
+}
+
+.login-brand {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+}
+
+.login-brand-icon {
+    width: 28px; height: 28px;
+    border-radius: 4px;
+    background: $primary;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .75rem;
+}
+
+.login-brand-nome { display: block; font-weight: 700; font-size: 1rem; color: #fff; }
+.login-brand-sub { display: block; font-size: .55rem; letter-spacing: .14em; text-transform: uppercase; color: lighten($primary, 20%); }
+
+.login-brand-empresa {
+    margin-top: .5rem;
+    font-size: .62rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: lighten($primary, 15%);
+}
+
+.login-titulo {
+    margin-top: 1.25rem;
+    font-size: clamp(2rem, 3.4vw, 2.6rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -.01em;
+}
+
+.text-primary-light { color: lighten($primary, 8%); }
+
+.login-texto {
+    max-width: 330px;
+    margin-top: 1.25rem;
+    font-size: .85rem;
+    line-height: 1.6;
+    color: rgba(#fff, .75);
+}
+
+.login-indicadores {
+    margin-top: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+
+    > div { border-top: 2px solid $primary; padding-top: .75rem; }
+    .valor { font-size: 1.25rem; font-weight: 700; }
+    .rotulo { font-size: .7rem; color: rgba(#fff, .55); }
+}
+
+.login-form-area {
+    flex: 1 1 35%;
+    background: $body-bg;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+
+    @include media-breakpoint-up(lg) { max-width: 440px; border-left: 1px solid $gray-200; }
+}
+
+.login-form-box { width: 100%; max-width: 360px; }
+
+.login-brand-mobile .login-brand-sub { color: $primary; }
+
+.login-form-titulo { font-size: 1.25rem; font-weight: 600; color: #1f2937; margin-bottom: .25rem; }
+.login-form-sub { font-size: .8rem; color: $gray-600; margin-bottom: 1.25rem; }
+
+.login-alerta {
+    background: #fde8e8;
+    border: 1px solid #f5b5b5;
+    color: #c0262d;
+    border-radius: .35rem;
+    padding: .65rem .8rem;
+    font-size: .75rem;
+    margin-bottom: 1.25rem;
+}
+
+.login-input {
+    background: #fff;
+    border-color: $gray-200;
+    min-height: 44px;
+    font-size: .85rem;
+
+    &:focus { border-color: $primary; }
+}
+
+.login-suporte {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: .68rem;
+    color: $gray-500;
+    line-height: 1.8;
+
+    a { font-family: $font-family-monospace; color: $primary; text-decoration: none; }
+}
+
+.login-rodape {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid $gray-200;
+    text-align: center;
+    font-size: .65rem;
+    color: $gray-500;
+}
+
+// Texto branco nos botões de cor da paleta (o Bootstrap escolheria preto pelo cálculo de contraste)
+.btn-primary, .btn-success, .btn-info {
+    --bs-btn-color: #fff;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-active-color: #fff;
+    --bs-btn-disabled-color: #fff;
+}

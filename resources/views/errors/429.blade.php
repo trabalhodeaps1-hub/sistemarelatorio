@@ -1,0 +1,5 @@
+@extends('errors.layout')
+@section('code', '429')
+@section('icon', 'speedometer')
+@section('title', 'Muitas tentativas')
+@section('message', 'Aguarde um minuto antes de tentar novamente.')
